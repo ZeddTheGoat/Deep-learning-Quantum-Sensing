@@ -21,7 +21,7 @@ args = {
     "n_path":4,
     'device_dict':device_dict,
     'n_train':3000,
-    'pauli': 'XX',
+    'pauli': 'Z',
     'quantize': 45
 }
 
@@ -69,7 +69,7 @@ def run_one_epoch(data_loader:DataLoader, type, epoch):
         torch.save(model.state_dict(),'./weights/predictor_{}_{}qubit_quantize{}_{}.pt'.format(args['pauli'],args['n_path'],args['quantize'],args['n_train']))
 
 data_path = './dataset/dataset_{}qubit_quantize{}.txt'.format(args['n_path'],args['quantize'])
-train_loader, test_loader = get_loader_qfm_var_XX(data_path,args['n_train'])
+train_loader, test_loader = get_loader_qfm_var_Z_quantize45(data_path,args['n_train'])
 num_epochs = 200
 mlflow.set_tracking_uri('./mlrun')
 with mlflow.start_run(run_name='test') as run:
